@@ -5,6 +5,6 @@ export interface Batsman {
     balls: number;
     fours: number;
     sixes: number;
-    innings: [];
+    innings: number[];
     strikeRate: number;
 }    
