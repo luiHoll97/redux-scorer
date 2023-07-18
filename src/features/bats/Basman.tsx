@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { addBatsmanName, addRunsToBatsman, selectBat, selectBat2, changeStrike } from "./batsmanSlice";
-import { Button, EditableInput, Input, Table, TableCaption, Thead, Tr, Th, Tbody } from "@chakra-ui/react";
+import { Button, Input, Table, TableCaption, Thead, Tr, Th, Tbody, SimpleGrid } from "@chakra-ui/react";
 
 
 export const Batsman = () => {
@@ -16,7 +16,7 @@ export const Batsman = () => {
         setBatsmanName("");
     };
 
-    const addRuns = () => {
+    const addRuns = (runs: number) => {
         dispatch(addRunsToBatsman(runs));
         if (runs % 2 !== 0) {
             dispatch(changeStrike());
@@ -42,9 +42,6 @@ export const Batsman = () => {
                     value={runs}
                     onChange={(e) => setRuns(Number(e.target.value))}
                 />
-                <Button onClick={addRuns}>
-                    Add Runs
-                </Button>
             </div>
             <Table variant={'striped'} colorScheme="linkedin">
                 <TableCaption>Scorecard</TableCaption>
@@ -78,6 +75,34 @@ export const Batsman = () => {
                 </Tbody>
             </Table>
             <div>
+                <SimpleGrid columns={3} spacing={5}>
+                    <Button onClick={() => addRuns(1)}>
+                        1
+                    </Button>
+                    <Button onClick={() => addRuns(2)}>
+                        2
+                    </Button>
+                    <Button onClick={() => addRuns(3)}>
+                        3
+                    </Button>
+                    <Button onClick={() => addRuns(4)}>
+                        4
+                    </Button>
+                    <Button onClick={() => addRuns(5)}>
+                        5
+                    </Button>
+                    <Button onClick={() => addRuns(6)}>
+                        6
+                    </Button>
+                    <Button>
+                        Wicket
+                    </Button>
+                    <Button onClick={() => addRuns(0)}>
+                        Dot Ball
+                    </Button>
+
+                </SimpleGrid>
+
                 <Button onClick={() => alert(batsman.innings)}>
                     Innings
                 </Button>
