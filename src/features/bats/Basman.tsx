@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { addBatsmanName, addRunsToBatsman, selectBat, selectBat2, changeStrike } from "./batsmanSlice";
-import styles from "./Batsman.module.css";
+import { Button, EditableInput, Input, Table, TableCaption, Thead, Tr, Th, Tbody } from "@chakra-ui/react";
+
 
 export const Batsman = () => {
     const batsman = useAppSelector(selectBat);
@@ -25,63 +26,61 @@ export const Batsman = () => {
 
     return (
         <div>
-            <div className={styles.row}>
-                <input
-                    className={styles.textbox}
+            <div>
+                <Input
                     aria-label="Set batsman name"
                     value={batsmanName}
                     onChange={(e) => setBatsmanName(e.target.value)}
                 />
-                <button className={styles.button} onClick={addBatsman}>
+                <Button onClick={addBatsman}>
                     Add Batsman
-                </button>
+                </Button>
             </div>
-            <div className={styles.row}>
-                <input
-                    className={styles.textbox}
+            <div >
+                <Input
                     aria-label="Set runs"
                     value={runs}
                     onChange={(e) => setRuns(Number(e.target.value))}
                 />
-                <button className={styles.button} onClick={addRuns}>
+                <Button onClick={addRuns}>
                     Add Runs
-                </button>
+                </Button>
             </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Batsman Name</th>
-                        <th>Runs</th>
-                        <th>Balls</th>
-                        <th>4s</th>
-                        <th>6s</th>
-                        <th>Strike Rate</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    <td>{batsman.name}</td>
-                    <td>{batsman.runs}</td>
-                    <td>{batsman.balls}</td>
-                    <td>{batsman.fours}</td>
-                    <td>{batsman.sixes}</td>
-                    <td>{((batsman.runs / batsman.balls) *100).toFixed(2)}</td>
-                    </tr>
-                    <tr>
-                    <td>{batsman2.name}</td>
-                    <td>{batsman2.runs}</td>
-                    <td>{batsman2.balls}</td>
-                    <td>{batsman2.fours}</td>
-                    <td>{batsman2.sixes}</td>
-                    <td>{((batsman2.runs / batsman2.balls) *100).toFixed(2)}</td>
-                    </tr>
-                </tbody>
-                
-            </table>
+            <Table variant={'striped'} colorScheme="linkedin">
+                <TableCaption>Scorecard</TableCaption>
+                <Thead>
+                    <Tr>
+                        <Th>Batsman</Th>
+                        <Th>Runs</Th>
+                        <Th>Balls</Th>
+                        <Th>4s</Th>
+                        <Th>6s</Th>
+                        <Th>Strike Rate</Th>
+                    </Tr>
+                </Thead>
+                <Tbody>
+                    <Tr>
+                        <Th>{batsman.name}</Th>
+                        <Th>{batsman.runs}</Th>
+                        <Th>{batsman.balls}</Th>
+                        <Th>{batsman.fours}</Th>
+                        <Th>{batsman.sixes}</Th>
+                        <Th>{((batsman.runs / batsman.balls) * 100).toFixed(2)}</Th>
+                    </Tr>
+                    <Tr>
+                        <Th>{batsman2.name}</Th>
+                        <Th>{batsman2.runs}</Th>
+                        <Th>{batsman2.balls}</Th>
+                        <Th>{batsman2.fours}</Th>
+                        <Th>{batsman2.sixes}</Th>
+                        <Th>{((batsman2.runs / batsman2.balls) * 100).toFixed(2)}</Th>
+                    </Tr>
+                </Tbody>
+            </Table>
             <div>
-                <button className={styles.button} onClick={() => alert(batsman.innings)}>
+                <Button onClick={() => alert(batsman.innings)}>
                     Innings
-                </button>
+                </Button>
             </div>
         </div>
     );
