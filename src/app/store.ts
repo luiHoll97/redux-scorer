@@ -1,11 +1,13 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import counterReducer from '../features/counter/counterSlice';
 import batsmanReducer from '../features/bats/batsmanSlice';
+import bowlerReducer from '../features/bowler/bowlerSlice';
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
     batsman: batsmanReducer,
+    bowler: bowlerReducer,
   },
 });
 
