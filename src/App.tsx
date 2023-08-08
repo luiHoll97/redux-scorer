@@ -1,7 +1,5 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import { Batsman } from './features/bats/Basman';
+
+import { Batsman } from './features/bats/Batsman';
 
 
 function App() {

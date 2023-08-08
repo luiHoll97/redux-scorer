@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { addBatsmanName, addRunsToBatsman, selectBat, selectBat2, changeStrike } from "./batsmanSlice";
-import { addBowlerName, addBallToBowler, addOverToBowler, addRunsToBowler, addWicketToBowler, selectBowler } from "../bowler/bowlerSlice";
+import { addBowlerName, addBallToBowler, addRunsToBowler, selectBowler } from "../bowler/bowlerSlice";
 import { Button, Input, Table, TableCaption, Thead, Tr, Th, Tbody, SimpleGrid, Divider, HStack } from "@chakra-ui/react";
 
 
@@ -12,7 +12,7 @@ export const Batsman = () => {
     const dispatch = useAppDispatch();
     const [batsmanName, setBatsmanName] = useState("");
     const [bowlerName, setBowlerName] = useState("");
-    const [runs, setRuns] = useState(0);
+    
 
     const addBatsman = () => {
         dispatch(addBatsmanName(batsmanName));
@@ -28,7 +28,6 @@ export const Batsman = () => {
         if (runs % 2 !== 0) {
             dispatch(changeStrike());
         }
-        setRuns(0);
     };
 
     return (

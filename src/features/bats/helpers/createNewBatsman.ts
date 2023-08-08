@@ -1,6 +1,6 @@
 import { Batsman } from "../interface/batsman";
 
-export const createNewBatsman = () => {
+export const createNewBatsman = () : Batsman => {
     return {
         id: 0,
         name: '',
