@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { addBatsmanName, addRunsToBatsman, selectBat, selectBat2, changeStrike } from "./batsmanSlice";
 import { addBowlerName, addBallToBowler, addRunsToBowler, selectBowler } from "../bowler/bowlerSlice";
-import { Button, Input, Table, TableCaption, Thead, Tr, Th, Tbody, SimpleGrid, Divider, HStack } from "@chakra-ui/react";
+import { Button, Input, Table, TableCaption, Thead, Tr, Th, Tbody, SimpleGrid, Divider, HStack, Box, Center, Text, Heading} from "@chakra-ui/react";
 
 
 export const Batsman = () => {
@@ -12,11 +12,16 @@ export const Batsman = () => {
     const dispatch = useAppDispatch();
     const [batsmanName, setBatsmanName] = useState("");
     const [bowlerName, setBowlerName] = useState("");
-    
+
 
     const addBatsman = () => {
         dispatch(addBatsmanName(batsmanName));
         setBatsmanName("");
+    };
+
+    const addBowler = () => {
+        dispatch(addBowlerName(bowlerName));
+        setBowlerName("");
     };
 
     const batsmen = [batsman, batsman2];
@@ -31,18 +36,27 @@ export const Batsman = () => {
     };
 
     return (
-        <div>
+        <Box m={5}>
+            <Box>
+                <Center>
+                    <Heading size='3xl' fontFamily='mono' m={5}>Redux Scorer</Heading>
+                    <Text fontSize='xl' fontFamily='mono' mr={5}>Hey, welcome to redux-scorer. This app is just to get a feel for how I can use redux for a larger application I am working on.
+                        This app uses no databse to track scores, so I will need to adjust my reducers with thunks to allow for async functionality between the app and firebase (my chosen databse)
+                    </Text>
+
+                </Center>
+            </Box>
             <div>
                 <HStack spacing={4}>
-                <Input
-                    aria-label="Set batsman name"
-                    value={batsmanName}
-                    onChange={(e) => setBatsmanName(e.target.value)}
-                    maxW={200}
-                />
-                <Button onClick={addBatsman}>
-                    Add Batsman
-                </Button>
+                    <Input
+                        aria-label="Set batsman name"
+                        value={batsmanName}
+                        onChange={(e) => setBatsmanName(e.target.value)}
+                        maxW={200}
+                    />
+                    <Button onClick={addBatsman}>
+                        Add Batsman
+                    </Button>
                 </HStack>
             </div>
             <Table variant={'striped'} colorScheme="linkedin">
@@ -95,10 +109,10 @@ export const Batsman = () => {
             </Table>
             <br />
             <HStack spacing={5}>
-            <Input maxW={200} aria-label="Set bowler name" value={bowlerName} onChange={(e) => setBowlerName(e.target.value)} />
-            <Button onClick={() => dispatch(addBowlerName(bowlerName))}>
-                Add Bowler
-            </Button>
+                <Input maxW={200} aria-label="Set bowler name" value={bowlerName} onChange={(e) => setBowlerName(e.target.value)} />
+                <Button onClick={() => addBowler()}>
+                    Add Bowler
+                </Button>
             </HStack>
             <div>
                 <SimpleGrid columns={3} spacing={5} mt={10}>
@@ -107,20 +121,17 @@ export const Batsman = () => {
                             {value}
                         </Button>
                     ))}
-                    <Button>
-                        Wicket
-                    </Button>
                     <Button onClick={() => addRuns(0)}>
                         Dot Ball
                     </Button>
-
+                    <Button onClick={() => alert(batsman.innings)}>
+                        Innings For Current Batsman
+                    </Button>
                 </SimpleGrid>
                 <br />
-                <Button onClick={() => alert(batsman.innings)}>
-                    Innings For Current Batsman
-                </Button>
+
             </div>
-        </div>
+        </Box>
     );
 }
 
